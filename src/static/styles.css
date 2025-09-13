@@ -12,14 +12,14 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: #eafaf1;
 }
 
 header {
   text-align: center;
   padding: 20px 0;
   margin-bottom: 30px;
-  background-color: #1a237e;
+  background-color: #2e7d32;
   color: white;
   border-radius: 5px;
 }
@@ -42,10 +42,10 @@ main {
 }
 
 section {
-  background-color: white;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.08);
   width: 100%;
   max-width: 500px;
 }
@@ -53,21 +53,21 @@ section {
 section h3 {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  color: #1a237e;
+  border-bottom: 1px solid #b2dfdb;
+  color: #388e3c;
 }
 
 .activity-card {
   margin-bottom: 15px;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #b2dfdb;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #f1f8e9;
 }
 
 .activity-card h4 {
   margin-bottom: 10px;
-  color: #0066cc;
+  color: #388e3c;
 }
 
 .activity-card p {
@@ -94,7 +94,7 @@ section h3 {
 }
 
 button {
-  background-color: #1a237e;
+  background-color: #43a047;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -105,7 +105,7 @@ button {
 }
 
 button:hover {
-  background-color: #3949ab;
+  background-color: #388e3c;
 }
 
 .message {
@@ -127,9 +127,9 @@ button:hover {
 }
 
 .info {
-  background-color: #d1ecf1;
-  color: #0c5460;
-  border: 1px solid #bee5eb;
+  background-color: #e0f2f1;
+  color: #00695c;
+  border: 1px solid #b2dfdb;
 }
 
 .hidden {
@@ -146,14 +146,14 @@ footer {
 .participants-section {
   margin-top: 12px;
   padding: 10px;
-  background-color: #eef2fa;
+  background-color: #e0f2f1;
   border-radius: 4px;
-  border: 1px solid #dde3f7;
+  border: 1px solid #b2dfdb;
 }
 
 .participants-section h5 {
   margin-bottom: 8px;
-  color: #3949ab;
+  color: #43a047;
   font-size: 1rem;
   font-weight: bold;
 }
@@ -175,14 +175,14 @@ footer {
 
 .participants-list .participant-item:hover,
 .participants-list .participant-item:focus {
-  background-color: #dbeafe;
-  color: #1a237e;
+  background-color: #c8e6c9;
+  color: #2e7d32;
   font-weight: bold;
 }
 
 .participant-tooltip {
   position: absolute;
-  background: #3949ab;
+  background: #388e3c;
   color: #fff;
   padding: 4px 10px;
   border-radius: 4px;
