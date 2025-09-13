@@ -27,8 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="participants-section">
               <h5>Participants</h5>
               <ul class="participants-list">
-                ${details.participants.map(email => `<li>${email}</li>`).join("")}
+                ${details.participants.map(email => `<li class="participant-item" data-email="${email}" tabindex="0">${email}</li>`).join("")}
               </ul>
+              <span class="participant-tooltip hidden"></span>
             </div>
           `;
         } else {
@@ -55,6 +56,36 @@ document.addEventListener("DOMContentLoaded", () => {
         option.value = name;
         option.textContent = name;
         activitySelect.appendChild(option);
+
+        // Add interactivity for participant emails
+        const participantItems = activityCard.querySelectorAll(".participant-item");
+        const tooltip = activityCard.querySelector(".participant-tooltip");
+        participantItems.forEach(item => {
+          item.addEventListener("click", async (e) => {
+            const email = item.getAttribute("data-email");
+            try {
+              await navigator.clipboard.writeText(email);
+              tooltip.textContent = `Copied: ${email}`;
+              tooltip.classList.remove("hidden");
+              tooltip.style.top = `${item.offsetTop + 24}px`;
+              tooltip.style.left = `${item.offsetLeft + 10}px`;
+              setTimeout(() => {
+                tooltip.classList.add("hidden");
+              }, 1200);
+            } catch {
+              tooltip.textContent = "Failed to copy";
+              tooltip.classList.remove("hidden");
+              setTimeout(() => {
+                tooltip.classList.add("hidden");
+              }, 1200);
+            }
+          });
+          item.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              item.click();
+            }
+          });
+        });
       });
     } catch (error) {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
