@@ -20,11 +20,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // Participants section
+        let participantsHTML = "";
+        if (details.participants.length > 0) {
+          participantsHTML = `
+            <div class="participants-section">
+              <h5>Participants</h5>
+              <ul class="participants-list">
+                ${details.participants.map(email => `<li class="participant-item" data-email="${email}" tabindex="0">${email}</li>`).join("")}
+              </ul>
+              <span class="participant-tooltip hidden"></span>
+            </div>
+          `;
+        } else {
+          participantsHTML = `
+            <div class="participants-section">
+              <h5>Participants</h5>
+              <p class="no-participants">No participants yet.</p>
+            </div>
+          `;
+        }
+
         activityCard.innerHTML = `
           <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          ${participantsHTML}
         `;
 
         activitiesList.appendChild(activityCard);
@@ -34,6 +56,36 @@ document.addEventListener("DOMContentLoaded", () => {
         option.value = name;
         option.textContent = name;
         activitySelect.appendChild(option);
+
+        // Add interactivity for participant emails
+        const participantItems = activityCard.querySelectorAll(".participant-item");
+        const tooltip = activityCard.querySelector(".participant-tooltip");
+        participantItems.forEach(item => {
+          item.addEventListener("click", async (e) => {
+            const email = item.getAttribute("data-email");
+            try {
+              await navigator.clipboard.writeText(email);
+              tooltip.textContent = `Copied: ${email}`;
+              tooltip.classList.remove("hidden");
+              tooltip.style.top = `${item.offsetTop + 24}px`;
+              tooltip.style.left = `${item.offsetLeft + 10}px`;
+              setTimeout(() => {
+                tooltip.classList.add("hidden");
+              }, 1200);
+            } catch {
+              tooltip.textContent = "Failed to copy";
+              tooltip.classList.remove("hidden");
+              setTimeout(() => {
+                tooltip.classList.add("hidden");
+              }, 1200);
+            }
+          });
+          item.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              item.click();
+            }
+          });
+        });
       });
     } catch (error) {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
